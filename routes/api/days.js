@@ -65,7 +65,7 @@ router.param('dayId', function (req, res, next, theDayId) {
 // Register a hotel to a day
 // /days/2/hotel
 router.put('/:dayId/hotel', function (req, res, next) {
-    req.day.setHotel(req.body.hotelId)
+    req.day.setHotel(req.body.hotelId)                      //req.DAY functionality comes from line 56 above
         .then(function (day) {
             res.sendStatus(204);
         })

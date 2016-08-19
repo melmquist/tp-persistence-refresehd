@@ -44,6 +44,18 @@ var tripModule = (function () {
 
         $addButton.on('click', function () {
 
+
+          $.post("/days", {
+            number: days.length+1
+          })
+          .then(function(createdDay){
+            doThisWithCreatedDayFromServer(createdDay);
+          })
+          .catch(function(errObj){
+            console.log(errObj)
+          });
+
+
             // JOE SAYS #2
             // Make a POST request with AJAX to the backend here
             // to add a new day to the database
@@ -101,6 +113,16 @@ var tripModule = (function () {
     var publicAPI = {
 
         load: function () {
+
+
+            $.get('/days')
+            .then(function(responseData){
+              doThisWhenServerGivesDaysBack(responseData);
+            })
+            .catch(function(errObj){
+              console.log(errObj)
+            });
+
 
             // JOE SAYS #1
             // Fetch all the days from the server with an AJAX request.

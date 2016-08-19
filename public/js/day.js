@@ -100,6 +100,7 @@ var dayModule = (function () {
 
     Day.prototype.addAttraction = function (attraction) {
 
+        // console.log(attraction);
         // JOE SAYS #3
         // Depending on the attraction type, make an AJAX request to
         // add this hotel/restaurant/activity to the day.
@@ -107,6 +108,23 @@ var dayModule = (function () {
         // meaning you are using the correct data structure (req.body)
         // hitting the right URL, etc.
         // Call the following function after your server responds:
+        // console.log(this);
+
+        //either make dynamic as one or make others for restaurant and activity and place in switch below
+        $.ajax({
+          url: '/days/' + this.id + '/hotel',
+          method: 'PUT',
+          data: {hotelId: attraction.id}
+        })
+        .then(function(addedHotel){
+          doThisAfterServerHasAddedAttraction(addedHotel)
+        })
+        .catch(function(errObj){
+          console.log(errObj)
+        });
+
+
+
         var doThisAfterServerHasAddedAttraction = function () {
             attraction.show();
         };
